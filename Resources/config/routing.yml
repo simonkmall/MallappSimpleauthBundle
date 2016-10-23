@@ -1,0 +1,3 @@
+mallapp_simpleauth_homepage:
+    path:     /
+    defaults: { _controller: MallappSimpleauthBundle:Default:index }
