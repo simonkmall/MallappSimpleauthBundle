@@ -1,0 +1,32 @@
+{
+    "name" : "mallapp/simpleauthbundle",
+    "description" : "A simple (and insecure) authorization mechanism",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Simon Mall",
+        "email" : "simon@mallapp.ch"
+    }],
+    "keywords" : [
+        "authentication symfony"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Mallapp\\SimpleauthBundle" : ""
+        }
+    },
+    "target-dir" : "Mallapp/SimpleauthBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "some_version-dev"
+        }
+    }
+}
