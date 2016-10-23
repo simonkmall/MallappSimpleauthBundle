@@ -1,3 +1,10 @@
-mallapp_simpleauth_homepage:
-    path:     /
-    defaults: { _controller: MallappSimpleauthBundle:Default:index }
+mallapp_simpleauth_create:
+    path:     /create
+    defaults: { _controller: MallappSimpleauthBundle:Default:create }
+    methods: [POST]
+
+mallapp_simpleauth_resend:
+    path:     /resend
+    defaults: { _controller: MallappSimpleauthBundle:Default:resend }
+    methods: [POST]
+    
