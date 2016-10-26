@@ -41,10 +41,8 @@ You will receive a JSON-formatted response containing the status `ok` and the ge
 ### Error Codes
 
 On every error, you receive a JSON-formatted resposne containing the status `nok` and the error message:
-| message | Description |
-| ------------- | ------------- |
-| INVALID_JSON  | Your request body does contain invalid json.  |
-| NO_NICKNAME  | You did not provide a nickname field in your request.  |
+- INVALID_JSON Your request body does contain invalid json.
+- NO_NICKNAME You did not provide a nickname field in your request.
 
 
 
@@ -79,12 +77,10 @@ You will receive a JSON-formatted response containing the status `ok` and the (e
 ### Error Codes
 
 On every error, you receive a JSON-formatted resposne containing the status `nok` and the error message:
-| message | Description |
-| ------------- | ------------- |
-| INVALID_JSON  | Your request body does contain invalid json.  |
-| NO_CURRENTMAIL  | You did not provide a currentmail field.  |
-| NO_NEWMAIL  | You did not provide a newmail field.  |
-| NO_USER  | There is no existing user with the currentmail address you provided.  |
+- INVALID_JSON Your request body does contain invalid json.
+- NO_CURRENTMAIL You did not provide a currentmail field.
+- NO_NEWMAIL You did not provide a newmail field.
+- NO_USER There is no existing user with the currentmail address you provided.
 
 
 ## Resend the token of an existing user to her email address
@@ -117,11 +113,9 @@ Note that this does not guarantee that the mail address provided by the user was
 ### Error Codes
 
 On every error, you receive a JSON-formatted resposne containing the status `nok` and the error message:
-| message | Description |
-| ------------- | ------------- |
-| INVALID_JSON  | Your request body does contain invalid json.  |
-| NO_EMAIL  | You did not provide an email field.  |
-| NO_USER  | There is no existing user with the currentmail address you provided.  |
+- INVALID_JSON: Your request body does contain invalid json.
+- NO_EMAIL: You did not provide an email field.
+- NO_USER: There is no existing user with the currentmail address you provided.
 
 
 
