@@ -20,6 +20,10 @@ class DefaultController extends Controller
         
         $params = $this->getRequestBodyJsonParameters($request);
         
+        if ($params == null) {
+            return new JsonResponse(array('status' => 'nok', 'message' => 'INVALID_JSON'));
+        }
+        
         if (!array_key_exists('nickname', $params)) {
             
             return new JsonResponse(array('status' => 'nok', 'message' => 'NO_NICKNAME'));
@@ -73,13 +77,102 @@ class DefaultController extends Controller
         
         return new JsonResponse(array('status' => 'ok', 'token' => $newUser->getToken()));
         
-        
-        
     }
+    
+    
+    public function updatemailAction(Request $request)
+    {
+    
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:BaseUser');
+
+        
+        $params = $this->getRequestBodyJsonParameters($request);
+        
+        if ($params == null) {
+            return new JsonResponse(array('status' => 'nok', 'message' => 'INVALID_JSON'));
+        }
+        
+        
+        if (!array_key_exists('currentmail', $params)) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'NO_CURRENTMAIL'));
+        
+        }
+        
+        if (!array_key_exists('newmail', $params)) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'NO_NEWMAIL'));
+        
+        }
+        
+        $currentmail = $params['currentmail'];
+        $newmail = $params['newmail'];
+
+            
+        $existingUser = $repository->findOneByEmail($currentmail);
+
+        if ($existingUser == null) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'NO_USER'));
+            
+        }
+           
+        // Update existing
+            
+        $existingUser->setEmail($newmail);
+
+        $em->flush();
+
+        return new JsonResponse(array('status' => 'ok', 'token' => $existingUser->getToken()));
+
+    }
+
+    
     
     public function resendAction(Request $request)
     {
-        return $this->render('MallappSimpleauthBundle:Default:index.html.twig');
+
+        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:BaseUser');
+        
+        $params = $this->getRequestBodyJsonParameters($request);
+        
+        if ($params == null) {
+            return new JsonResponse(array('status' => 'nok', 'message' => 'INVALID_JSON'));
+        }
+        
+        
+        if (!array_key_exists('email', $params)) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'NO_EMAIL'));
+        
+        }
+        
+        $existingUser = $repository->findOneByEmail($params['email']);
+
+        if ($existingUser == null) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'NO_USER'));
+            
+        }
+        
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Your Password')
+            ->setFrom('noreply@mallapp.ch')
+            ->setTo($existingUser->getEmail())
+            ->setBody(
+                $this->renderView(
+                    // app/Resources/views/Emails/registration.html.twig
+                    'MallappSimpleauthBundle:Emails:resend.html.twig',
+                    array('name' => $existingUser->getNickname(), 'code' => $existingUser->getToken())
+                ),
+                'text/html'
+            );
+        
+        $this->get('mailer')->send($message);
+
+        return new JsonResponse(array('status' => 'ok'));
+    
     }
     
     private function getRequestBodyJsonParameters(Request $request) {

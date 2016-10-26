@@ -3,6 +3,11 @@ mallapp_simpleauth_create:
     defaults: { _controller: MallappSimpleauthBundle:Default:create }
     methods: [POST]
 
+mallapp_simpleauth_updatemail:
+    path:     /updatemail
+    defaults: { _controller: MallappSimpleauthBundle:Default:updatemail }
+    methods: [POST]
+
 mallapp_simpleauth_resend:
     path:     /resend
     defaults: { _controller: MallappSimpleauthBundle:Default:resend }

@@ -1,0 +1,15 @@
+{# app/Resources/views/Emails/registration.html.twig #}
+<h3>Your Code</h3>
+
+<p>Hi {{ name }}! You asked for the code to use with your app.<p>
+
+{# example, assuming you have a route named "login" #}
+<p>Your Code is: <b>{{ code }}</b><p>
+
+<p>Best Regards,<br/>
+    The Mallapp Team.</p>
+
+<p>
+{# Makes an absolute URL to the /images/logo.png file #}
+<img src="http://www.mallapp.ch/images/Mallapp_logo2_medium.png" width="50px" height="50px">
+</p>
