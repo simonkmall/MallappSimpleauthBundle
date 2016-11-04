@@ -81,7 +81,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:BaseUser');
 
-        
         $params = $this->getRequestBodyJsonParameters($request);
         
         if ($params == null) {
@@ -101,8 +100,15 @@ class DefaultController extends Controller
         
         }
         
+        if (!array_key_exists('token', $params)) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'INVALID_TOKEN'));
+        
+        }
+        
         $currentmail = $params['currentmail'];
         $newmail = $params['newmail'];
+        $token = $params['token'];
 
             
         $existingUser = $repository->findOneByEmail($currentmail);
@@ -110,6 +116,22 @@ class DefaultController extends Controller
         if ($existingUser == null) {
             
             return new JsonResponse(array('status' => 'nok', 'message' => 'NO_USER'));
+            
+        }
+        
+        $existingUserNewMail = $repository->findOneByEmail($newmail);
+
+        if ($existingUserNewMail != null) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'EMAIL_USED'));
+            
+        }
+        
+        // Check token
+        
+        if ($existingUser->getToken() != $token) {
+            
+            return new JsonResponse(array('status' => 'nok', 'message' => 'INVALID_TOKEN'));
             
         }
            

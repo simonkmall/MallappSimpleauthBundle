@@ -58,11 +58,11 @@ You need to provide valid JSON in the request body, which contains at least the 
 
 ```
 {
+"token":"GoNPDra",
 "currentmail":"habasch@mail.com",
 "newmail":"johann@mail.com"
 }
 ```
-
 
 ### Successful Response
 
@@ -81,7 +81,9 @@ On every error, you receive a JSON-formatted resposne containing the status `nok
 - INVALID_JSON Your request body does contain invalid json.
 - NO_CURRENTMAIL You did not provide a currentmail field.
 - NO_NEWMAIL You did not provide a newmail field.
+- INVALID_TOKEN You did provide an invalid token for this user (or none at all).
 - NO_USER There is no existing user with the currentmail address you provided.
+- EMAIL_USED There is an existing user with the newmail address you provided.
 
 
 ## Resend the token of an existing user to her email address
