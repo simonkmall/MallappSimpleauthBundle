@@ -25,7 +25,6 @@ If you additionnaly provide an email address, you can always recover your token,
 }
 ```
 
-Note that if you create a user with an email address for which already a user exists, the token remains the same but the nickname is updated.
 
 ### Successful Response
 
@@ -43,6 +42,8 @@ You will receive a JSON-formatted response containing the status `ok` and the ge
 On every error, you receive a JSON-formatted resposne containing the status `nok` and the error message:
 - INVALID_JSON Your request body does contain invalid json.
 - NO_NICKNAME You did not provide a nickname field in your request.
+- EMAIL_USED This email is already in use. You can resend the token to the email adress or use a different email address.
+
 
 
 

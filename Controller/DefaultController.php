@@ -44,12 +44,7 @@ class DefaultController extends Controller
             
             if ($existingUser != null) {
                 
-                // Update existing
-                $existingUser->setNickname($nickname);
-        
-                $em->flush();
-                
-                return new JsonResponse(array('status' => 'ok', 'token' => $existingUser->getToken()));
+                return new JsonResponse(array('status' => 'nok', 'message' => 'EMAIL_USED'));
                 
             }
             else {
