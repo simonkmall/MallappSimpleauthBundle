@@ -1,3 +1,20 @@
+# Installation
+
+- Install the bundle via composer
+- Register the beundle in your AppKernel.php
+- Add the routes as described below
+
+Add the following to your routing.yml:
+
+```
+mallapp_simpleauth:
+    resource: "@MallappSimpleauthBundle/Resources/config/routing.yml"
+    prefix:   /auth
+```
+
+Note that the prefix is completely up to you.
+
+
 # JSON-Content of the API calls
 
 ## Create a new user
