@@ -7,19 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * BaseUser
  *
- * @ORM\Table(name="base_user")
- * @ORM\Entity(repositoryClass="Mallapp\SimpleauthBundle\Repository\BaseUserRepository")
+ * @ORM\MappedSuperclass
  */
 class BaseUser
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -43,15 +34,6 @@ class BaseUser
     private $nickname;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set token

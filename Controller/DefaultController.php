@@ -5,7 +5,7 @@ namespace Mallapp\SimpleauthBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Mallapp\SimpleauthBundle\Entity\BaseUser;
+use Mallapp\SimpleauthBundle\Entity\SimpleUserEntity;
 
 class DefaultController extends Controller
 {
@@ -15,7 +15,7 @@ class DefaultController extends Controller
     {
     
         $em = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:BaseUser');
+        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:SimpleUserEntity');
 
         
         $params = $this->getRequestBodyJsonParameters($request);
@@ -32,7 +32,7 @@ class DefaultController extends Controller
         
         $nickname = $params['nickname'];
         
-        $newUser = new BaseUser();
+        $newUser = new SimpleUserEntity();
         
         if (array_key_exists('email', $params)) {
          
@@ -60,7 +60,7 @@ class DefaultController extends Controller
         
         do {
         
-            $tokenCandidate = BaseUser::createToken();
+            $tokenCandidate = SimpleUserEntity::createToken();
         
         } while ($repository->findOneByToken($tokenCandidate) != null);
             
@@ -79,7 +79,7 @@ class DefaultController extends Controller
     {
     
         $em = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:BaseUser');
+        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:SimpleUserEntity');
 
         $params = $this->getRequestBodyJsonParameters($request);
         
@@ -150,7 +150,7 @@ class DefaultController extends Controller
     public function resendAction(Request $request)
     {
 
-        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:BaseUser');
+        $repository = $this->getDoctrine()->getRepository('MallappSimpleauthBundle:SimpleUserEntity');
         
         $params = $this->getRequestBodyJsonParameters($request);
         

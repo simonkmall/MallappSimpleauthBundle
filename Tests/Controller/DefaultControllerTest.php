@@ -64,7 +64,7 @@ class DefaultControllerTest extends WebTestCase
         $currentToken = $responseData['token'];
         
         // Check storage into DB
-        $baseUser = $this->em->getRepository('MallappSimpleauthBundle:BaseUser')->findOneByToken($currentToken);
+        $baseUser = $this->em->getRepository('MallappSimpleauthBundle:SimpleUserEntity')->findOneByToken($currentToken);
         
         $this->assertNotNull($baseUser);
         $this->assertEquals('habasch@mail.com',$baseUser->getEmail());
@@ -91,7 +91,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertEquals('ok', $responseDataTwo['status']);
         
          // Check storage into DB
-        $baseUserTwo = $this->em->getRepository('MallappSimpleauthBundle:BaseUser')->findOneByToken($currentToken);
+        $baseUserTwo = $this->em->getRepository('MallappSimpleauthBundle:SimpleUserEntity')->findOneByToken($currentToken);
         
         $this->assertNotNull($baseUserTwo);
         $this->assertEquals('johann@mail.com',$baseUserTwo->getEmail());
@@ -125,7 +125,7 @@ class DefaultControllerTest extends WebTestCase
     {
         parent::tearDown();
 
-        $this->em->createQuery('DELETE FROM MallappSimpleauthBundle:BaseUser')->execute();
+        $this->em->createQuery('DELETE FROM MallappSimpleauthBundle:SimpleUserEntity')->execute();
         $this->em->close();
         $this->em = null; // avoid memory leaks
     }
